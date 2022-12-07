@@ -144,9 +144,10 @@ const LinkList = styled(List)`
   flex: 1;
 `;
 
-const CollapseMenuItem = styled(MenuItemButton)`
+const CollapseMenuItem = styled(MenuItemButton)<{ isCollapsed: boolean }>`
   display: none;
-
+  transform: ${({ isCollapsed }) =>
+    isCollapsed ? "rotate(180deg)" : "rotate(0deg)"};
   @media (min-width: ${breakpoint("desktop")}) {
     display: flex;
   }
@@ -189,11 +190,12 @@ export function SidebarNavigation() {
           </LinkList>
 
           <List>
-            <MenuItemButton
+            <MenuItemLink
               text="Support"
               iconSrc="/icons/support.svg"
               isCollapsed={isSidebarCollapsed}
-              onClick={() => alert("Support")}
+              isActive={false}
+              href="mailto:support@prolog-app.com?subject=Support Request:"
             />
             <CollapseMenuItem
               text="Collapse"
